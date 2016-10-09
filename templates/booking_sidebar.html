@@ -1,0 +1,77 @@
+
+<!--Left Sidebar-->
+<div class="col-md-3 md-margin-bottom-20">
+    <ul class="list-group sidebar-nav-v1" id="sidebar-nav-1">
+        <li class="list-group-item list-toggle">
+
+            <li class="list-group-item {% if type == "overview" %} active {% endif %}">
+                <a href="/booking/{{ booking.id }}">
+                    Överblick
+                </a>
+            </li>
+            
+            <li class="list-group-item {% if type == "map" %} active {% endif %}">
+                <a href="/booking/map/{{ booking.id }}">
+                    Karta
+                </a>
+            </li>
+        </li>
+    </ul>
+
+    {% if user.student %}
+        <ul class="list-group sidebar-nav-v1" id="sidebar-nav-1">
+            <li class="list-group-item {% if type == "reserv" %} active {% endif %}">
+                {% if my_booking_row.status == 1 %}
+                    <a href="/booking/.../{{ booking.id }}">
+                        Betala bokning
+                    </a>
+                {% elif my_booking_row.status == 2 %}
+                    <a href="/booking/{{ booking.id }}">
+                        Din bokning är betalad
+                    </a>
+                {% else %}
+                    <a href="/booking/reserv/{{ booking.id }}">
+                        Boka plats
+                    </a>
+                {% endif %}
+            </li>            
+        </ul>
+    {% elif not user.trainer %}
+        <ul class="list-group sidebar-nav-v1" id="sidebar-nav-1">
+            {% if booking.state == 2 %}
+            <!-- Do nothing... -->
+            {% elif not booking.booking_full and not booking.happened %}
+            <li class="list-group-item">
+                <a href="/login">Boka plats (Login krävs)</a>
+            </li>
+            {% elif booking.booking_full %}
+            <!-- Booking is full. Do nothing --> 
+            {% endif %}
+        </ul>
+    {% endif %}
+
+    {% if user.trainer and user.id == booking.trainer.user.id %}
+        <ul class="list-group sidebar-nav-v1" id="sidebar-nav-1">
+            <li class="list-group-item list-toggle">
+                <li class="list-group-item" {% if type == "edit" %} class="active" {% endif %}>
+                    <a href="/booking/edit/{{ booking.id }}">
+                        Editera information
+                    </a>
+                </li>
+
+                <li class="list-group-item" {% if type == "remove" %} class="active" {% endif %}>
+                    <a href="/booking/cancel_trainer/{{ booking.id }}">
+                        Ställ in träning
+                    </a>
+                </li>
+
+                <li class="list-group-item" {% if type == "students" %} class="active" {% endif %}>
+                    <a href="/booking/students/{{ booking.id }}">
+                        Elever
+                    </a>
+                </li>
+            </li>
+        </ul>
+    {% endif %}
+</div>
+ <!--End Left Sidebar-->

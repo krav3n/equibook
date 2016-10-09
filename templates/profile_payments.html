@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container content profile">
+        <div class="row">
+
+            {% include "profile_sidebar.html" with type='payments' %}
+
+            <div class="col-md-9">
+                <div class="profile-body margin-bottom-20">
+                    <div class="panel-heading overflow-h">
+                        <h2 class="panel-title heading-sm pull-left">
+                            Alla betalningar
+                        </h2>
+                    </div>
+
+                    <div class="table-search-v1 margin-bottom-20">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Betalning (Detaljer)</th>
+                                        <th>Status</th>
+                                        <th>Pris</th>
+                                        <th>Träning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for payment in payments %}
+                                    <tr>
+                                        <td>
+                                            <a href="/profile/payment/{{ payment.id }}">
+                                                Visa detaljer
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {% if payment.status == 1 %}
+                                                <button class="btn btn-u btn-u-red disabled" style="float: left;">
+                                                    Ej betald
+                                                </button>
+                                            {% elif payment.status == 2 %}
+                                                <button class="btn btn-u btn-u-greend disabled" style="float: left;">
+                                                    Betalad
+                                                </button>
+                                            {% elif payment.status == 3 %}
+                                                <button class="btn btn-u btn-u-red disabled" style="float: left;">
+                                                    Återbetalning processeras
+                                                </button>
+                                            {% elif payment.status == 4 %}
+                                                <button class="btn btn-u btn-u-sea disabled" style="float: left;">
+                                                    Återbetald
+                                                </button>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {{ payment.booking.price }}:-
+                                        </td>
+                                        <td>
+                                            {{ payment.booking.club }} - {{ payment.booking.when }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>    
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

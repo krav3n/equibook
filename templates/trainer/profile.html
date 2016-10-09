@@ -1,0 +1,73 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block content %}
+    
+    <h2> Trainer profile </h2>
+
+    <table border=1>
+        <tr>
+            <td><b>Name</b></td>
+            <td>{{ trainer.name }}</td>
+        </tr>
+        <tr>
+            <td><b>Phone</b></td>
+            <td>{{ trainer.phone }}</td>
+        </tr>
+        <tr>
+            <td><b>Email</b></td>
+            <td>{{ trainer.email }}</td>
+        </tr>
+        <tr>
+            <td><b>User homepage</b></td>
+            <td><a href="{{ trainer.homepage }}">{{ trainer.homepage }}</a></td>
+        </tr>
+        {% if user.trainer %}
+        <tr>
+            <td><b>Total earned</b></td>
+            <td>{{ trainer.total_earned }}</td>
+        </tr>
+        <tr>
+            <td><b>Earned this month</b></td>
+            <td>{{ trainer.total_earned_month }}</td>
+        </tr>
+        <tr>
+            <td><b>Earned year</b></td>
+            <td>{{ trainer.total_earned_year }}</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    <br> <hr> <br>
+
+    <h2>Bookings</h2>
+
+    <table border=1>
+        <tr>
+            <th>View Booking</th>
+            <th>When</th>
+            <th>Where</th>
+            <th>Full</th>
+            <th>Max spots</th>
+            <th>Spots filled</th>
+            {% if user.trainer %}
+            <th>Edit</th>
+            {% endif %}
+        </tr>
+        {% for booking in bookings %}
+            <tr>
+                <th><a href="/booking/show_booking/{{ booking.id }}">View booking</a></th>
+                <td>{{ booking.when }}</td>
+                <td>{{ booking.format_location }}</td>
+                <td>{{ booking.booking_full_str }}</td>
+                <td>{{ booking.max_participants }}</td>
+                <td>{{ booking.num_spots_filled }}</td>
+                {% if user.trainer %}
+                <td><a href="/booking/edit/{{ booking.id }}">Edit booking</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

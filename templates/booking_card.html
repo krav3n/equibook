@@ -1,0 +1,112 @@
+{# This include file can be used to build a training card and render it where it was useed #}
+
+{% if type == "basic" %}
+
+<li class="col-md-4 md-margin-bottom-20">
+    <div class="content-boxes-v3 block-grid-v1 rounded bg-red">
+        <div class="content-boxes-in-v3">
+            <h3>{{ booking.format_location }}</h3>
+
+            <b>Distrikt:</b>
+            <a href="/booking?county={{ booking.county }}" class="color-green">
+                {{ booking.get_county_display }}
+            </a>
+
+            <br>
+
+            <b>Plats/klubb:</b> {{ booking.club }}
+
+            <br>
+
+            <b>Dicipline:</b> {{ booking.get_dicipline_display }}
+
+            <br>
+
+            <ul class="list-inline margin-bottom-5">
+                <li> <b>Tränare: </b> <a href="/profile/{{ booking.trainer.user.id }}" class="color-green">{{ booking.trainer }}</a></li> <br>
+                <li><i class="fa fa-clock-o"></i> {{ booking.when }} </li> <br>
+                {% if not booking.booking_full %}
+                <li><b>Lediga platser: </b> {{ booking.free_spots }} </li>
+                {% endif %}
+            </ul>
+
+            <p>
+                <b>Pris:</b> {{ booking.price }}:-
+
+                <a href="/booking/{{ booking.id }}" class="color-green">
+                    {% if booking.canceled %}
+                        <button class="btn-u btn-u-red" style="float: right;">
+                            Detaljer (Inställd)
+                        </button>
+                    {% elif booking.done %}
+                        <button class="btn-u btn-u-blue" style="float: right;">
+                            Detaljer (Genomförd)
+                        </button>
+                    {% elif booking.booking_full %}
+                        <button class="btn-u btn-u-red" style="float: right;">
+                            Detaljer (Fullbokad)
+                        </button>
+                    {% elif 2 >= booking.free_spots >= 1%}
+                        {# Show yellow button if there is less then 2 spots left #}
+                        <button class="btn-u btn-u-sea" style="float: right;">
+                            Detaljer (Få platser kvar)
+                        </button>
+                    {% else %}
+                        <button class="btn-u btn-u-blue" style="float: right;">
+                            Detaljer
+                        </button>
+                    {% endif %}
+                </a>
+            </p>
+        </div>
+    </div>
+</li>
+
+{% elif type == "student_profile" %}
+
+<li class="col-md-4 md-margin-bottom-20">
+    <div class="content-boxes-v3 block-grid-v1 rounded bg-red">
+        <div class="content-boxes-in-v3">
+            {% if booking.aborted %}
+            <div class="alert alert-danger fade in">
+                <strong>Träningen är inställd. Se detaljer för orsak.</strong>
+            </div>
+            {% endif %}
+
+            <h3>{{ booking.format_location }}</h3>
+
+            <b>Distrikt:</b>
+            <a href="/booking?county={{ booking.county }}" class="color-green">
+                {{ booking.get_county_display }}
+            </a>
+
+            <ul class="list-inline margin-bottom-5">
+                <li> <b>Tränare: </b> <a href="/profile/{{ booking.trainer.user.id }}" class="color-green">{{ booking.trainer }}</a></li> <br>
+                <li><i class="fa fa-clock-o"></i> {{ booking.when }} </li> <br>
+            </ul>
+
+            <p>
+                <b>Pris:</b> {{ booking.price }}:-
+
+                <a href="/booking/{{ booking.id }}" class="color-green">
+                    <button class="btn-u btn-u-blue" style="float: right;">
+                        Detaljer
+                    </button>
+                </a>
+            </p>
+        </div>
+    </div>
+</li>
+
+{% elif type == 'nothing_found' %}
+    {# This one is used in search to show that nothing was found #}
+
+<li class="col-md-4 md-margin-bottom-20">
+    <div class="content-boxes-v3 block-grid-v1 rounded bg-red">
+        <div class="content-boxes-in-v3">
+            Din sökning gav inga träffar. Ändra på dina sök parametrar eller klicka på 'Rensa alla filter' knappen för att påbörja en ny sökning.
+        </div>
+    </div>
+</li>
+
+{% endif %}

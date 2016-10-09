@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container content profile">
+        <div class="row">
+
+            {% include "profile_sidebar.html" with type='payments' %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                        <div class="col-sm-12 sm-margin-bottom-30">
+                            <div class="panel panel-profile">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left">
+                                        Detaljer för betalning
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    <b>Payment lösning: </b> {{ payment.get_payment_display }} <br>
+                                    <b>Pris: </b> {{ payment.booking.price }}:- <br>
+                                    <b>Bokning gjord av: </b> {{ payment.student }} <br>
+                                    <b>Träning: </b> <a href="/booking/{{ payment.booking.id }}">{{ payment.booking }}</a> <br>
+                                    <b>Status för betalningen: </b>
+                                        {% if payment.status == 1 %}
+                                            <button class="btn btn-u btn-u-red disabled">
+                                                Ej betald
+                                            </button>
+                                        {% elif payment.status == 2 %}
+                                            <button class="btn btn-u btn-u-greend disabled">
+                                                Betalad
+                                            </button>
+                                        {% elif payment.status == 3 %}
+                                            <button class="btn btn-u btn-u-red disabled">
+                                                Återbetalning processeras
+                                            </button>
+                                        {% elif payment.status == 4 %}
+                                            <button class="btn btn-u btn-u-sea disabled">
+                                                Återbetald
+                                            </button>
+                                        {% endif %}
+                                        <br>
+                                    <b>Abort Reason: </b> {{ payment.abort_reason }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if user.student %}
+                        {# Only show if it is Paid or Not Paid #}
+                        {% if payment.status == 1 or payment.status == 2 %}
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12 sm-margin-bottom-30">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left">
+                                            Avboka denna betalning
+                                        </h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        {# Only possible to cancel if booking is in planning state #}
+                                        {% if payment.booking.status == 1 %}
+                                        <p>
+                                            Klicka här för att avboka och få tillbaka dina pengar.
+                                        </p>
+                                        <p>
+                                            <a href="/booking/cancel_student/{{ payment.id }}">
+                                                <button class="btn btn-u btn-u-sea">
+                                                    Avboka / Återbetala
+                                                </button>
+                                            </a>
+                                        </p>
+                                        {% else %}
+                                        <p>
+                                            Träningen har redan genomförts och du kan inte avboka/återbetala denna betalning. För att få den återbetalad måste du kontakta tränaren för träningen som i sin tur kan återbetala betalningen.
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% elif user.trainer %}
+                        {# Only show if it is Paid or Not Paid #}
+                        {% if payment.status == 2 %}
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12 sm-margin-bottom-30">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left">
+                                            Återbetala denna betalning
+                                        </h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        {# Only possible to cancel if booking is in planning state #}
+                                        {% if payment.booking.status == 1 %}
+                                        <p>
+                                            Klicka här för att avboka och få tillbaka dina pengar.
+                                        </p>
+                                        <p>
+                                            <a href="/booking/cancel_student/{{ payment.id }}">
+                                                <button class="btn btn-u btn-u-sea">
+                                                    Avboka / Återbetala
+                                                </button>
+                                            </a>
+                                        </p>
+                                        {% else %}
+                                        <p>
+                                            Träningen har redan genomförts och du kan inte avboka/återbetala denna betalning. För att få den återbetalad måste du kontakta tränaren för träningen som i sin tur kan återbetala betalningen.
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

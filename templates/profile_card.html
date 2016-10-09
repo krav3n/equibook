@@ -1,0 +1,49 @@
+{# This include file can be used to build a training card and render it where it was useed #}
+
+{% if type == "basic" %}
+    <li class="col-md-4 md-margin-bottom-20">
+        <div class="content-boxes-v3 block-grid-v1 rounded bg-red">
+            <div class="content-boxes-in-v3">
+                <h3>{{ trainer.name }}</h3>
+
+                <b>Distrikt:</b>
+                <a href="/trainer/?county={{ trainer.county }}" class="color-green">
+                    {{ trainer.get_county_display }}
+                </a>
+
+                <ul class="list-inline margin-bottom-5">
+                    <li><b>Email: </b> {{ trainer.email }} </li> <br>
+                    <li><b>Hemsida: </b> <a class="color-green" href="{{ trainer.homepage }}"> {{ trainer.homepage }} </a></li> <br>
+                    <li><b>Telefon: </b> {{ trainer.phone }}</li> <br>
+                    <li><b>Nivå: </b> {{ trainer.get_skill_level_display }}</li> <br>
+                    <li><b>Dicipliner: </b> {{ trainer.format_diciplines_string }}</li> <br>
+                    
+                    <br>
+
+                    <a href="/profile/{{ trainer.user.id }}" class="color-green">
+                        <button class="btn-u btn-u-sea" style="float: left;">
+                            Visa profil
+                        </button>
+                    </a>
+
+                    <li class="topbar-devider"></li>
+
+                    <a href="/profile/schema/{{ trainer.user.id }}">
+                        <button class="btn-u btn-u-sea" style="">
+                            Visa Schema
+                        </button>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </li>
+{% elif type == 'nothing_found' %}
+    {# This one is used in search to show that nothing was found #}
+    <li class="col-md-4 md-margin-bottom-20">
+        <div class="content-boxes-v3 block-grid-v1 rounded bg-red">
+            <div class="content-boxes-in-v3">
+                Din sökning gav inga träffar. Ändra på dina sök parametrar eller klicka på 'Rensa alla filter' knappen för att påbörja en ny sökning.
+            </div>
+        </div>
+    </li>
+{% endif %}

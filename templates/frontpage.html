@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block title %}Frontpage{% endblock %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_search.css">
+    <link rel="stylesheet" href="/static/assets/css/pages/page_search_inner_tables.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="bg-image-v1 parallaxBg margin-bottom-60">
+        <div class="container">
+            <div class="headline-center headline-light">
+                <h2>Välkommen till EquiBook</h2>
+                <p>Du hittar alla träningar och tränare i den övre menyn.</p>
+                <p>För att logga in eller registrera ett nytt konto så har du länkar längst upp i högra hörnet.</p>
+                <p>Längre ner så kan du hitta en lista på sista minuten träningar som du har möjlighet att boka.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <ul class="list-unstyled row portfolio-box">
+                <li class="col-sm-4 md-margin-bottom-50">
+                    <a class="thumbnail fancybox" data-rel="gallery" title="Project Two" href="/faq">
+                        <img class="full-width img-responsive" src="/static/assets/img/main/img22.jpg" alt="">
+                        <span class="portfolio-box-in">
+                            <i class="rounded-x icon-magnifier-add"></i>
+                        </span>
+                    </a>    
+                    <div class="headline-left margin-bottom-10"><h3 class="headline-brd">Så fungerar EquiBook</h3></div>
+                    <p>Lär allt om hur EquiBook fungerar</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bg-grey">
+        <div class="container content-xs">
+            <ul class="row list-row margin-bottom-30">
+                <li class="col-md-12 md-margin-bottom-30">
+                    <div class="content-boxes-v3 block-grid-v1 rounded">
+                        <div class="content-boxes-in-v3">
+                            <h3>Sista minuten träningar</h3>
+                        </div>
+                        <div class="content-boxes-in-v3">
+                        <form id="sky-form" class="sky-form">
+                            <label class="select" style="float: left;">
+                            {{ form.county }}
+                                <i></i>
+                            </label>
+                        </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+
+            {% for booking in last_minute_trainings %}
+                {% ifequal forloop.counter0|modulo:3 0 %}
+                    <ul class="row list-row margin-bottom-30">
+                {% endifequal %}
+
+                {% include "booking_card.html" with booking=booking type='basic' %}
+
+                {% ifequal forloop.counter0|modulo:3 2 %}
+                    </ul>
+                {% endifequal %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="parallax-counter-v2 parallaxBg1">
+        <div class="container">
+            <ul class="row list-row">
+                <li class="col-md-3 col-sm-6 col-xs-12 md-margin-bottom-30">
+                    <div class="counters rounded">
+                        <span class="counter">{{ num_bookings }}</span>
+                        <h4>Antal träningar</h4>
+                    </div>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 sm-margin-bottom-30">
+                    <div class="counters rounded">
+                        <span class="counter">{{ num_booking_rows }}</span>
+                        <h4>Antal bokningar</h4>
+                    </div>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 md-margin-bottom-30">
+                    <div class="counters rounded">
+                        <span class="counter">{{ num_trainers }}</span> 
+                        <h4>Antal tränare</h4>
+                    </div>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="counters rounded">
+                        <span class="counter">{{ num_students }}</span>
+                        <h4>Antal elever</h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

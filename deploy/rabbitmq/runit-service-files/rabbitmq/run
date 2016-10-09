@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+# exec /usr/local/bin/celery worker -A celeryd -E >> /var/log/celeryd.log 2>&1
+
+exec /usr/sbin/rabbitmq-server >> /var/log/rabbitmq-server.log 2>&1

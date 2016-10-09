@@ -1,0 +1,36 @@
+{% extends "profile_base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block bread_page %}Editera träning{% endblock bread_page %}
+
+{% block content %}
+
+    <!--=== Profile ===-->
+    <div class="container content profile">
+        <div class="row">
+
+            {% include "profile_sidebar.html" with type='newtraining' %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                        <div class="col-sm-12 sm-margin-bottom-30">
+                            <div class="panel panel-profile">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left">
+                                        Editera bokning
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    {% include "forms/booking.html" with form=form %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

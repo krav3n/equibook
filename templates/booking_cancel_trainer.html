@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block title %}Bokning | Avboka din bokning{% endblock %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Content Part ===-->
+    <div class="container content profile">
+        <div class="row">
+            
+            {% include "booking_sidebar.html" with type='overall' %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="profile-bio">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="headline">
+                                    <h3>Viktig information kring vad som händer när en tränare gör en avbokning.</h3>
+                                </div>
+                                <p>
+                                    Här skall det stå om allting som en tränare behöver veta för att göra en avbokning/återbetalning.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

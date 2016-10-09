@@ -1,0 +1,57 @@
+TOOD
+**************
+
+* Reset password funktionalitet måste skapas
+  * Skapa token model i databasen så man kan resetta
+  * Skapa formen för input av credentials till sitt konto
+  * Koppla formen till login view
+  * Skapa steg2 form där man kan skriva in nytt lösenord
+
+Ur elevens synpunkt så behöver man inte se att något är fullbokad, bokade platser kanske behöver tas bort också.
+
+Man vill kunna se vilken gren en booking är.
+
+Om man söker på 'ida idasson' så när formen refreshas så får man inte med hela namnet i value fältet utan bara det första ordet.
+
+Fixa form error caset i all_trainers()
+
+Fixa form error caset i all_trainings()
+
+Om man väljer Visa Fullbokade så visar den även de som har varit genomförda.
+
+Döp om status till state i BookingRow klassen
+
+Pagenation på alla mina träningar sidan.
+
+Fixa BookingRow.save() todo:s
+
+
+
+
+DONE
+************
+
+Logga in med fel lösenord så blir man skickad till förstasidan
+
+Nya fält i sök sidorna som hanterar dessa fält ovan.
+
+Om man väljer en page i sök och pagen finns inte så får man error
+
+Lägg till hemsida i tränar profilen.
+
+Fixa problem med att en user blir redirectad till / när man failar att logga in.
+
+Skapa login.js där man sätter focus på login input knappen direkt vid page load
+
+Få lista av michaela via trello på vilka typer av träningar det finns.
+
+Ta bort distrikt från top menu dropdown
+
+Tränarna behöver olika kunskapsområden som skall vara samma lista som för träning men de skall heta olika.
+
+Träning --> Gren
+
+Tränare --> Gren
+
+Lägg till Inställd kolumn för elevents träningar som säger om den är inställ eller inte.
+

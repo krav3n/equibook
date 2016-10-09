@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block title %}Bokning | Överblick{% endblock %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Content Part ===-->
+    <div class="container content profile">
+        <div class="row">
+            
+            {% include "booking_sidebar.html" with type='overall' %}
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                        <div class="col-sm-12 sm-margin-bottom-30">
+                            <div class="panel panel-profile">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left">
+                                        <b>Information</b>
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    {% if booking.aborted %}
+                                        <div class="alert alert-danger fade in">
+                                            <strong>Träningen är inställd. Se 'Avboknings anledning' nedan för mera information.</strong>
+                                        </div>
+                                    {% elif booking.happened %}
+                                        <div class="alert alert-info fade in">
+                                            <strong>Träningen har redan inträffat och går ej längre att boka.</strong>
+                                        </div>
+                                    {% endif %}
+
+                                    <b>Tränare:</b> {{ booking.trainer.name }} <br>
+                                    <b>Plats:</b> {{ booking.format_location }} <br>
+                                    <b>Tid:</b> {{ booking.when }} <br>
+                                    <b>Träningens längd:</b> {{ booking.duration }} minuter <br>
+                                    {% if not booking.aborted %}
+                                    <b>Kostnad per bokning:</b> {{ booking.price }}:- <br>
+                                    <b>Fullbokat:</b>
+                                    {% if booking.booking_full %}
+                                        <button class="btn-u btn-u-sm btn-u-red rounded" disabled>Ja</button> <br>
+                                    {% else %}
+                                        <button class="btn-u btn-u-sm rounded" disabled>Nej</button> <br>
+                                    {% endif %}
+                                    <b>Bokade platser:</b> {{ booking.num_spots_filled }} av {{ booking.max_participants }} <br>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-12 sm-margin-bottom-30">
+                            <div class="panel panel-profile">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left">
+                                        <b>Beskrivning</b>
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        {{ booking.notes }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if booking.aborted %}
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12 sm-margin-bottom-30">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left">
+                                            <b>Avboknings anledning</b>
+                                        </h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>
+                                            {{ booking.canceled_notes }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

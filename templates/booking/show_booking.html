@@ -1,0 +1,149 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block content %}
+
+    {% if user.trainer %}
+    <h2>Trainer Actions</h2>
+
+    <a href="/booking/trainer_abort/{{ booking.id }}">
+        <button type="button" class="btn btn-danger">
+            Abort booking
+        </button>
+    </a>
+
+    <a href="/booking/edit/{{ booking.id }}">
+        <button type="button" class="btn btn-success">
+            Edit booking
+        </button>
+    </a>
+    {% endif %}
+    
+    {% if user.student %}
+    <h2>Student Actions</h2>
+
+    <a href="/booking/participate?booking={{ booking.id }}">
+        <button type="button" class="btn btn-success">
+            Participate
+        </button>
+    </a>
+
+    <a href="/booking/student_abort/{{ booking.id }}">
+        <button type="button" class="btn btn-warning">
+            Abort participation
+        </button>
+    </a>
+    {% endif %}
+
+    <br> <br>
+
+    <h2> Booking details </h2>
+
+    <table border=1>
+        <tr>
+            <td><b>Trainer</b></td>
+            <td><a href="/trainer/profile/{{ booking.trainer.id }}">{{ booking.trainer }}</a></td>
+        </tr>
+        <tr>
+            <td><b>when</b></td>
+            <td>{{ booking.when }}</td>
+        </tr>
+        <tr>
+            <td><b>Happened</b></td>
+            <td>{{ booking.happened }}</td>
+        </tr>
+        <tr>    
+            <td><b>Location</b></td>
+            <td>{{ booking.format_location }}</td>
+        </tr>
+        <tr>
+            <td><b>Full</b></td>
+            <td>{% if booking.booking_full %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        <tr>
+            <td><b>Notes</b></td>
+            <td>{{ booking.notes }}</td>
+        </tr>
+        <tr>
+            <td><b>Canceled Notes</b></td>
+            <td>{{ booking.canceled_notes }}</td>
+        </tr>
+        <tr>
+            <td><b>Price</b></td>
+            <td>{{ booking.price }}</td>
+        </tr>
+        <tr>
+            <td><b>Max Participants</b></td>
+            <td>{{ booking.max_participants }}</td>
+        </tr>
+        <tr>
+            <td><b>Num spots filled</b></td>
+            <td>{{ booking.num_spots_filled }}</td>
+        </tr>
+        <tr>
+            <td><b>State</b></td>
+            <td>{{ booking.status_string }}</td>
+        </tr>
+        {% if user.trainer %}
+        <tr>
+            <td><b>Paid participants</b></td>
+            <td>{{ booking.paid_participants }}</td>
+        </tr>
+        <tr>
+            <td><b>Not paid yet</b></td>
+            <td>{{ booking.not_paid_participants }}</td>
+        </tr>
+        <tr>
+            <td><b>Refund pending</b></td>
+            <td>{{ booking.refund_pending }}</td>
+        </tr>
+        <tr>
+            <td><b>Refunded</b></td>
+            <td>{{ booking.refunded }}</td>
+        </tr>
+        <tr>
+            <td><b>Payment Earnings</b></td>
+            <td>{{ booking.calc_earned }}:-</td>
+        </tr>
+        <tr>
+            <td><b>Pending payment</b></td>
+            <td>{{ booking.calc_pending_earned }}:-</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    <br><hr><br>
+
+    <h2> Participants </h2>
+
+    <table border=1>
+        <tr>
+            <th>Student name</th>
+            <th>Booking status</th>
+            <th>Payment option</th>
+            <th>Abort reason</th>
+            {% if user.trainer %}
+            <th>Refund</th>
+            {% endif %}
+        </tr>
+
+    {% for row in booking.bookingrow_set.all %}
+        <tr>
+            <td><a href="/student/profile/{{ row.student.id }}">{{ row.student.name }}</a></td>
+            <td>{{ row.get_status_display }}</td>
+            <td>{{ row.get_payment_display }}</td>
+            {% if row.is_aborted %}
+            <td>{{ row.abort_reason }}</td>
+            {% else %}
+            <td>--</td>
+            {% endif %}
+            {% if user.trainer and row.abortable %}
+            <td><a href="/booking/trainer_abort/{{ row.id }}">Refund</a></td>
+            {% elif user.trainer %}
+            <td>Not possible</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

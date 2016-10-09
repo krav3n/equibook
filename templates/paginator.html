@@ -1,0 +1,40 @@
+
+<div class="bg-grey">
+    <ul class="pagination" style="margin-left: 20px;">
+    {% if paginator.has_other_pages %}
+        {% if paginator.has_previous %}
+            <li><a href="{{ paginator.previous }}" title='Go to previous page' class="page next-prev">&lt;</a></li>
+        {% endif %}
+
+            {% for index, url in paginator.left_edge %}
+                <li><a href="{{ url }}">{{ index }}</a></li>
+            {% endfor %}
+
+            {% if paginator.has_left_elipse %}
+                <li><a href="#">...</a></li>
+            {% endif %}
+
+            {% for index, url in paginator.center %}
+                {% if paginator.current_index == index %}
+                    <li class="active"><a href="{{ url }}">{{ index }}</a></li>
+                {% else %}
+                    <li><a href="{{ url }}">{{ index }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if paginator.has_right_elipse %}
+                <li><a href="#">...</a></li>
+            {% endif %}
+
+            {% for index, url in paginator.right_edge %}
+                <li><a href="{{ url }}">{{ index }}</a></li>
+            {% endfor %}
+
+        {% if paginator.has_next %}
+            <li><a href="{{ paginator.next }}" title='Go to next page' class="page next-prev">&gt;</a></li>
+        {% endif %}
+    {% endif %}
+    </ul>
+
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block title %}Bokning | Elever{% endblock %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Content Part ===-->
+    <div class="container content profile">
+        <div class="row">
+            
+            {% include "booking_sidebar.html" with type='students' %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                        <div class="table-search-v1 margin-bottom-20">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Namn</th>
+                                            <th>Status</th>
+                                            <th>Bokning gjord</th>
+                                            <th>Senast uppdaterad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for bookingrow in booking.good_booking_rows %}
+                                        <tr>
+                                            <td>
+                                                {{ bookingrow.student.name }}
+                                            </td>
+                                            <td>
+                                                {{ bookingrow.get_status_display }}
+                                            </td>
+                                            <td>
+                                                {{ bookingrow.created }}
+                                            </td>
+                                            <td>
+                                                {{ bookingrow.updated }}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "profile_base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block bread_page %}Översikt{% endblock bread_page %}
+
+{% block content %}
+    <div class="container content profile">
+        <div class="row">
+
+            {% include "profile_sidebar.html" with type='overall' %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                        <div class="col-sm-6 sm-margin-bottom-30">
+                            <div class="panel panel-profile">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left">
+                                        Kontakt information
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                     <ul class="list-unstyled social-contacts-v2">
+                                        <li><i class="rounded-x tw fa fa-user"></i>{{ profile.trainer.name }}{{ profile.student.name }}</li>
+                                        <li><i class="rounded-x fb fa fa-phone"></i>{{ profile.trainer.phone }}{{ profile.student.phone }}</li>
+                                        <li><i class="rounded-x gm fa fa-envelope"></i>{{ profile.trainer.email }}{{ profile.student.email }}</li>
+                                    {% if profile.trainer %}
+                                        <li><i class="rounded-x gm fa fa-cog"></i><b>Hemsida: </b><a class="color-green" href="{{ profile.trainer.homepage }}">{{ profile.trainer.homepage }}</a></li>
+                                        <li><i class="rounded-x gp fa fa-cog"></i><b>Tränar nivå:</b> {{ profile.trainer.get_skill_level_display }}</li>                                        
+                                        <li><i class="rounded-x gm fa fa-cog"></i><b>Dicipliner: </b> {{ diciplines }} </li>
+                                    {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if profile.trainer %}
+                            <div class="col-sm-6 sm-margin-bottom-30">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left">
+                                            Introduktion
+                                        </h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <h2>{{ profile.trainer.name }}</h2>
+                                        <p>{{ profile.trainer.bio }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

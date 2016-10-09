@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_contact.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Our Contacts</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="index.html">Hem</a></li>
+                <li class="active">Kontakt</li>
+            </ul>
+        </div>
+    </div>
+    <!--=== End Breadcrumbs ===-->
+
+    <div class="container content">     
+        <div class="row margin-bottom-30">
+            <div class="col-md-9 mb-margin-bottom-30">
+                <p>Accusamus et iusto odio dignissimos <strong class="color-green">ducimus qui blanditiis</strong> praesentium voluptatum deleniti atque corrupti quos dolores et quas feugiat. Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing <strong class="color-green">elit landitiis</strong>. Quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipidipiscing elit mag scing. Ut non libero consectetur adipiscing elit magna distinctio lorem ipsum dolor sit amet consectetur adipiscing eliidem rerum facilist.</p><br>
+                <div class="tag-box tag-box-v2">
+                    <p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat.</p>
+                </div>            
+                <p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p><br>
+                
+                <form action="assets/php/sky-forms-pro/demo-contacts-process.php" method="post" id="sky-form3" class="sky-form contact-style">
+                    <fieldset class="no-padding">
+                        <label>Name <span class="color-red">*</span></label>
+                        <div class="row sky-space-20">
+                            <div class="col-md-7 col-md-offset-0">
+                                <div>
+                                    <input type="text" name="name" id="name" class="form-control">
+                                </div>
+                            </div>                
+                        </div>
+                        
+                        <label>Email <span class="color-red">*</span></label>
+                        <div class="row sky-space-20">
+                            <div class="col-md-7 col-md-offset-0">
+                                <div>
+                                    <input type="text" name="email" id="email" class="form-control">
+                                </div>
+                            </div>                
+                        </div>
+                        
+                        <label>Message <span class="color-red">*</span></label>
+                        <div class="row sky-space-20">
+                            <div class="col-md-11 col-md-offset-0">
+                                <div>
+                                    <textarea rows="8" name="message" id="message" class="form-control"></textarea>
+                                </div>
+                            </div>                
+                        </div>
+                        
+                        <p><button type="submit" class="btn-u">Send Message</button></p>
+                    </fieldset>
+
+                    <div class="message">
+                        <i class="rounded-x fa fa-check"></i>
+                        <p>Your message was successfully sent!</p>
+                    </div>
+                </form>
+            </div><!--/col-md-9-->
+            
+            <div class="col-md-3">
+                <!-- Google Map -->
+                <div id="map" class="map map-box map-box-space1 margin-bottom-40">
+                </div><!---/map-->
+                <!-- End Google Map -->
+
+                <!-- Contacts -->
+                <div class="headline"><h2>Contacts</h2></div>
+                <ul class="list-unstyled who margin-bottom-30">
+                    <li><a href="#"><i class="fa fa-home"></i>Muningatan 9, 75308 Uppsala</a></li>
+                    <li><a href="#"><i class="fa fa-envelope"></i>info@equibook.se</a></li>
+                    <li><a href="#"><i class="fa fa-phone"></i>+46 070-2932006</a></li>
+                </ul>
+                <!-- End Contacts -->
+            </div><!--/col-md-3-->
+        </div><!--/row-->        
+    </div>
+
+{% endblock %}

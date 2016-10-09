@@ -1,0 +1,68 @@
+<!-- This file contains the global menu -->
+<div class="header">
+
+    <div class="container">
+        <a class="logo" href="/">
+            <img src="/static/assets/img/logo1-default.png" alt="Logo">
+        </a>
+        
+        <div class="topbar">
+            <ul class="loginbar pull-right">
+                {% if not user.is_authenticated %}
+                <li><a href="/login">Logga in</a></li>
+                <li class="topbar-devider"></li>
+                <li><a href="/register">Registrera</a></li>
+                {% else %}
+                <li><a href="/profile/">Min profil - {% if user.trainer %}Tränare{% elif user.student %}Elev{% endif %}</a></li>
+                <li class="topbar-devider"></li>
+                <li><a href="/logout/">Logga ut</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+        </button>
+    </div>
+
+    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li class="menu">
+                    <a href="/">
+                        Hem
+                    </a>
+                </li>
+
+                <li class="menu">
+                    <a href="/booking">
+                        Sök träning
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/trainer">
+                        Sök tränare
+                    </a>
+                </li>
+
+                {% if user.student and user.is_authenticated %}
+                <li class="menu">
+                    <li><a href="/profile/schema/">Mina träningar</a></li>
+                </li>
+                {% endif %}
+
+                <li class="dropdown">
+                    <a href="javascript:void(0);">
+                        Om oss
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/kontakt">Kontakta oss</a></li>
+                        <li><a href="/team">Teamet</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

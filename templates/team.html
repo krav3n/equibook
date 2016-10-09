@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_contact.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Om oss</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="index.html">Hem</a></li>
+                <li class="active">Om oss</li>
+            </ul>
+        </div>
+    </div><!--/breadcrumbs-->
+    <!--=== End Breadcrumbs ===-->
+
+    <div class="container content">
+        <!-- Meer Our Team -->
+        <div class="headline"><h2>Skaparna bakom EquiBook</h2></div>
+        <div class="row team">
+            <div class="col-sm-3">
+                <div class="thumbnail-style">
+                    <img class="img-responsive" src="/static/assets/img/team/img1-md.jpg" alt="" />
+                    <h3><a>Johan Andersson</a> <small>Chief Technical Officer</small></h3>
+                    <p></p>
+                    <ul class="list-unstyled list-inline team-socail">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumbnail-style">
+                    <img class="img-responsive" src="/static/assets/img/team/img1-md.jpg" alt="" />
+                    <h3><a>Michaela Werme</a> <small>Chief Executive Officer</small></h3>
+                    <p></p>
+                    <ul class="list-unstyled list-inline team-socail">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumbnail-style">
+                    <img class="img-responsive" src="/static/assets/img/team/img1-md.jpg" alt="" />
+                    <h3><a>Mattias Naukkarinen</a> <small>Chief Operating Officer</small></h3>
+                    <p></p>
+                    <ul class="list-unstyled list-inline team-socail">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Meer Our Team -->
+    </div>
+
+{% endblock %}

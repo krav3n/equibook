@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_log_reg_v1.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Content Part ===-->
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <form class="reg-page">
+                    <div class="reg-header">
+                        <h2>Registrera ett konto</h2>
+                        <p>Redan registrerad? Klicka <a href="/login" class="color-green">Logga in</a> för att logga in på ditt konto.</p>
+                    </div>
+
+                    <label>För namn</label>
+                    <input type="text" class="form-control margin-bottom-20">
+                   
+                    <label>Efter namn</label>
+                    <input type="text" class="form-control margin-bottom-20">
+                   
+                    <label>Email Address <span class="color-red">*</span></label>
+                    <input type="text" class="form-control margin-bottom-20">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Lösenord <span class="color-red">*</span></label>
+                            <input type="password" class="form-control margin-bottom-20">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Bekräfta Lösenord <span class="color-red">*</span></label>
+                            <input type="password" class="form-control margin-bottom-20">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-lg-6 checkbox">
+                            <label>
+                                <input type="checkbox"> 
+                                Jag har läst <a href="page_terms.html" class="color-green">Terms and Conditions</a>
+                            </label>                        
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <button class="btn-u" type="submit">Registrera</button>                        
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--/container-->     
+    <!--=== End Content Part ===-->
+
+{% endblock %}

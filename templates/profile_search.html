@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block title %}Alla tränare{% endblock %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_search_inner_tables.css">
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Sök Tränare</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="/">Hem</a></li>
+                <li class="active">Sök Tränare</li>
+            </ul>
+        </div>
+    </div>
+    <!--=== End Breadcrumbs ===-->
+
+    <div class="search-block" style="padding-top: 15px; padding-bottom: 15px;">
+        <div class="container">
+            <form method="get" action="/trainer/" id="sky-form" class="sky-form" style="border: 0px;">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-1">
+                        <input id="id_q" maxlength="128" name="q" type="text" class="form-control" placeholder="Fritext sökning ..." id="search_input" value={{ form.q.value|default_if_none:"" }}>
+                        <br>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="select">
+                            {{ form.county }}
+                            <i></i>
+                        </label>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="select">
+                            {{ form.level }}
+                            <i></i>
+                        </label>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="select">
+                            {{ form.dicipline }}
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1 margin-bottom-10">
+                        <button type="submit" class="btn-u btn-block btn-u-green">Sök</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="/trainer">
+                            <button type="button" class="btn-u btn-block btn-u-aqua">Rensa alla filter</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-grey">
+        <div class="container content-xs">
+            {% if page %}
+                {% for trainer in page %}
+                    {% ifequal forloop.counter0|modulo:3 0 %}
+                        <ul class="row list-row margin-bottom-20">
+                    {% endifequal %}
+
+                    {% include "profile_card.html" with trainer=trainer type='basic' %}
+
+                    {% ifequal forloop.counter0|modulo:3 2 %}
+                        </ul>
+                    {% endifequal %}
+                {% endfor %}
+            {% else %}
+                {% include "profile_card.html" with type='nothing_found' %}
+            {% endif %}
+
+        </div>
+    </div>
+    
+    {% include "paginator.html" with paginator=paginator %}
+
+{% endblock %}

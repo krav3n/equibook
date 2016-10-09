@@ -1,0 +1,51 @@
+
+ <div class="col-md-3 md-margin-bottom-40">
+     <img class="img-responsive profile-img margin-bottom-20" src="/static/assets/img/user.jpg" alt="">
+
+    <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+         <li class="list-group-item">
+             <a href="#">
+                <i class="fa"></i>
+                {% if profile.student %}Elev: {% else %}Tränare: {% endif %}{{ profile.student.name }}{{ profile.trainer.name }}
+            </a>
+         </li>
+     </ul>
+
+     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+         <li class="list-group-item {% if type == "overall" %} active {% endif %}">
+             <a href="/profile/{{ profile.id }}">
+                <i class="fa fa-bar-chart-o"></i>
+                Överblick
+            </a>
+         </li>
+         <li class="list-group-item {% if type == "schema" %} active {% endif %}">
+             <a href="/profile/schema/{{ profile.id }}">
+                <i class="fa fa-bar-chart-o"></i>
+                Tränings kalender
+            </a>
+         </li>
+         {% if profile.id == user.id %}
+         <li class="list-group-item {% if type == "payments" %} active {% endif %}">
+             <a href="/profile/payments">
+                <i class="fa fa-bar-chart-o"></i>
+                Betalningar
+            </a>
+         </li>
+         <li class="list-group-item {% if type == "settings" %} active {% endif %}">
+             <a href="/profile/settings">
+                <i class="fa fa-cog"></i>
+                Inställningar
+            </a>
+         </li>
+         {% if user.trainer %}
+         <li class="list-group-item {% if type == "newtraining" %} active {% endif %}">
+             <a href="/booking/new">
+                <i class="fa fa-cog"></i>
+                Ny träning
+            </a>
+         </li>
+         {% endif %}
+         {% endif %}
+     </ul>
+     <hr>
+</div>

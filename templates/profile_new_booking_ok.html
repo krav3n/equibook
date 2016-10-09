@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container content profile">
+        <div class="row">
+
+            {% include "profile_sidebar.html" with type='payments' %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                        <div class="col-sm-12 sm-margin-bottom-30">
+                            <div class="panel panel-profile">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left">
+                                        Träning skapad
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Träningen är nu skapad och kommer vara sökbar inom kort.</p>
+                                    <p><a href="/booking/{{ booking.id }}">Visa detaljer</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

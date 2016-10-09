@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_log_reg_v1.css">
+{% endblock %}
+
+{% block page_js %}
+    <script rel="text/javascript" src="/static/js/custom_login.js"></script>
+{% endblock page_js %}
+
+{% block content %}
+
+    <div class="container content">     
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <form action="/login/skicka/" method="POST" class="reg-page">
+                    {% csrf_token %}
+
+                    <div class="reg-header">            
+                        <h2>Logga in till ditt konto</h2>
+                    </div>
+
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input id="username" name="username" type="text" placeholder="Användarnamn" class="form-control">
+                    </div>                    
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input is="password" name="password" type="password" placeholder="Lösenord" class="form-control">
+                    </div>                    
+
+                    <div class="row">
+                        <div class="col-md-6 checkbox"> </div>
+                        <div class="col-md-6">
+                            <button class="btn-u pull-right" type="submit">Logga in</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h4>Glömt ditt lösenord ?</h4>
+                    <p>Inga problem, <a class="color-green" href="#">Klicka här</a> för att återställa ditt lösenord.</p>
+                </form>            
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends "profile_base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block bread_page %}Schema{% endblock bread_page %}
+
+{% block content %}
+    <div class="container content profile">
+        <div class="row">
+
+            {% include "profile_sidebar.html" with type='schema' profile=profile %}
+
+            <div class="col-md-9">
+                <div class="profile-body">
+                    <div class="row">
+                    </div>
+
+                    <div class="panel-heading overflow-h">
+                        <h2 class="panel-title heading-sm pull-left">
+                            <b>
+                                Alla {% if user.trainer.id == profile.trainer.id %}Mina{% endif %} träningar
+                            </b>
+                        </h2>
+                    </div>
+
+                    <div class="table-search-v1 margin-bottom-20">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Tid</th>
+                                        <th>Plats</th>
+                                        <th>Status</th>
+                                        <th>Pris</th>
+                                        {% if user.student %}
+                                        <th>Betalning (Klicka för detaljer)</th>
+                                        {% endif %}
+                                        {% if user.trainer and my_profile %}
+                                        <th>Visa alla betalningar</th>
+                                        {% endif %}
+                                        <th>Detaljer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for booking, payment in z %}
+                                    <tr>
+                                        <td>
+                                            {{ booking.when }}
+                                        </td>
+                                        <td>
+                                            {{ booking.format_location }}
+                                        </td>
+                                        <td>
+                                            {% if booking.canceled %}
+                                            <button class="btn btn-u btn-u-red disabled" style="float: left;">
+                                                Inställd
+                                            </button>
+                                            {% elif booking.done %}
+                                            <button class="btn btn-u btn-u-greend disabled" style="float: left;">
+                                                Genomförd
+                                            </button>
+                                            {% elif booking.booking_full %}
+                                            <button class="btn btn-u btn-u-red disabled" style="float: left;">
+                                                Fullbokad
+                                            </button>
+                                            {% elif 2 >= booking.free_spots >= 1 %}
+                                            <button class="btn btn-u btn-u-sea disabled" style="float: left;">
+                                                Få platser finnd kvar
+                                            </button>
+                                            {% else %}
+                                            <button class="btn btn-u btn-u-blue disabled" style="float: left;">
+                                                Platser finns kvar
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {{ booking.price }}:-
+                                        </td>
+                                        {% if user.trainer and my_profile %}
+                                        <td>
+                                            <a href="#">
+                                                Visa betalningar
+                                            </a>
+                                        </td>
+                                        {% endif %}
+                                        {% if user.student %}
+                                        <td>
+                                            <a href="/profile/payment/{{ payment.id }}">
+                                            {% if payment.status == 1 %}
+                                                <button class="btn btn-u btn-u-red" style="float: left;">
+                                                    Ej betald
+                                                </button>
+                                            {% elif payment.status == 2 %}
+                                                <button class="btn btn-u btn-u-greend" style="float: left;">
+                                                    Betalad
+                                                </button>
+                                            {% elif payment.status == 3 %}
+                                                <button class="btn btn-u btn-u-red" style="float: left;">
+                                                    Återbetalning processeras
+                                                </button>
+                                            {% elif payment.status == 4 %}
+                                                <button class="btn btn-u btn-u-sea" style="float: left;">
+                                                    Återbetald
+                                                </button>
+                                            {% endif %}
+                                            </a>
+                                        </td>
+                                        {% endif %}
+                                        <td>
+                                            <a href="/booking/{{ booking.id }}">Visa detaljer</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

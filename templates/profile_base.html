@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/profile.css">
+{% endblock %}
+
+{% block breadcrumbs %}
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Profil</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="/">Hem</a></li>
+            <li><a href="/profile/{{ profile.id }}">Profil</a></li>
+            <li class="active">{% block bread_page %}Foobar...{% endblock bread_page %}</li>
+        </ul>
+    </div>
+</div>
+<!--=== End Breadcrumbs ===-->
+{% endblock breadcrumbs %}

@@ -1,0 +1,130 @@
+
+<form method="get" action="/booking/make_new" id="sky-form" class="sky-form" style="border: 0px;">
+    <div class="col-md-2">
+        <b>Tid: </b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            <input id="when" name="when" type="date" value="{{ form.when.value }}">
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Antal platser:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.max_participants }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Träningens längd:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="select">
+            {{ form.duration}}
+            <i></i>
+        </label>
+    </div>
+    <br> <br> <br>
+    
+    <div class="col-md-2">
+        <b>Dicipline: </b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="select">
+            {{ form.dicipline }}
+            <i></i>
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Gata:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.street }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Postnummer:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.zipcode }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Stad:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.city }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Distrikt:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="select">
+            {{ form.county }}
+            <i></i>
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Club:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.club }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Pris:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.price }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Longitude:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.lon }}
+        </label>
+    </div>
+    <br> <br> <br>
+
+    <div class="col-md-2">
+        <b>Latitude:</b>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label class="input">
+            {{ form.lat }}
+        </label>
+    </div>
+    <br> <br> <br>
+    
+    <b>Beskrivning: </b> <br> {{ form.notes }} <br>
+
+    <button type="submit">Skapa</button>
+    <button type="">Avbryt</button>
+</form>

@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block content %}
+    
+    <h2> Search </h2>
+
+    This should demonstrate what fields can be searched
+
+    <br> <hr> <br>
+
+    Trainer: <br>
+    <input id="trainer-search" type="text" size="250" class="text ui-widget-content ui-corner-all" />
+
+    <br> <hr> <br>
+
+    Student: <br>
+    <input id="student-search" type="text" size="250" class="text ui-widget-content ui-corner-all" />
+
+    <br> <hr> <br>
+
+    Location booking search: <br>
+    <input style="width: 350px;" id="location-search" type="text" size="250" class="text ui-widget-content ui-corner-all" />
+
+{% endblock %}

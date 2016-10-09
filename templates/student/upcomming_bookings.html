@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block content %}
+
+<h2>Upcomming trainings</h2>
+
+<table style="width:45%" border=1>
+    <tr>
+        <th>When</th>
+        <th>Club</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Paid</th>
+        <th>Refund</th>
+    </tr>
+{% for row in student_bookings %}
+    {% if not row.booking.happened %}
+    <tr>
+        <td>{{ row.booking.when }}</td>
+        <td>{{ row.booking.club }}</td>
+        <td>{{ row.booking.format_location }}</td>
+        <td>{{ row.booking.price }}:-</td>
+        <td>{{ row.get_status_display }}</td>
+        <td>
+            {% if row.refundable %}
+                <a href="/booking/student_abort?id={{ row.id }}">Abort booking</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endif %}
+{% endfor %}
+</table>
+
+<br> <hr> <br>
+
+<h2> Trainings already happened </h2>
+
+<table style="width:45%" border=1>
+    <tr>
+        <th>When</th>
+        <th>Club</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Paid</th>
+    </tr>
+{% for row in student_bookings %}
+    {% if row.booking.happened %}
+    <tr>
+        <td>{{ row.booking.when }}</td>
+        <td>{{ row.booking.club }}</td>
+        <td>{{ row.booking.format_location }}</td>
+        <td>{{ row.booking.price }}:-</td>
+        <td>{{ row.get_status_display }}</td>
+    </tr>
+    {% endif %}
+{% endfor %}
+</table>
+
+{% endblock %}

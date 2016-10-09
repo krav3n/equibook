@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+
+{% block title %}Bokning{% endblock %}
+
+{% block pagestyle %}
+{% endblock %}
+
+{% block content %}
+
+    <!--=== Content Part ===-->
+    <div class="container content">
+        <div class="row">
+            
+            {% include "booking_sidebar.html" with type='overall' booking=booking %}
+    
+            <div class="col-md-9">
+
+                <div class="headline"><h3>Plats</h3></div>
+
+                <b>Gata:</b> {{ booking.street }} <br>
+                <b>Postnummer: </b> {{ booking.zipcode }} <br>
+                <b>Stad: </b> {{ booking.city }} <br>
+                <b>Distrikt: </b> {{ booking.get_county_display }} <br>
+                <b>Longitude:</b> {{ booking.lon }} <br>
+                <b>Latitude:</b> {{ booking.lat }} <br>
+
+                <br>
+
+                <div class="headline"><h3>Karta</h3></div>
+
+                {% if booking.trainer_set_coordinates == False %}
+                <div class="alert alert-warning fade in">
+                    <strong>Varning!</strong> Tränaren har inte satt ut markören på kartan själv. Vi har försökt att göra en så bra uppskattning som möjligt utifrån den plats information som har angivits men avvikelser kan förekomma.
+                </div>
+                {% endif %}
+
+                <div id="map" class="map margin-bottom-50"></div>
+
+            </div>
+        
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{# TODO: Wrap around some block... #}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="/static/assets/plugins/gmap/gmap.js"></script>
+
+{% block jquery_boot %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();
+            ContactPage.init_map_loc({{ booking.lat }}, {{ booking.lon }});
+        });
+    </script>
+{% endblock %}

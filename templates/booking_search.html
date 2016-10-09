@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load i18n admin_static modulo %}
+
+{% block title %}Alla träningar{% endblock %}
+
+{% block pagestyle %}
+    <link rel="stylesheet" href="/static/assets/css/pages/page_search_inner_tables.css">
+{% endblock %}
+
+{% block content %}
+    
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Sök Träning</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="/">Hem</a></li>
+                <li class="active">Sök träning</li>
+            </ul>
+        </div>
+    </div>
+    <!--=== End Breadcrumbs ===-->
+
+    <!--=== Search Block Version 2 ===-->
+    <div class="search-block" style="padding-top: 15px; padding-bottom: 15px;">
+        <div class="container">
+            <form method="get" action="/booking/" id="sky-form" class="sky-form" style="border: 0px;">
+                <div class="row margin-bottom-20">
+                    <div class="col-md-2 col-md-offset-1">
+                        <label class="select">
+                            {{ form.county }}
+                            <i></i>
+                        </label>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="select">
+                            {{ form.dicipline }}
+                            <i></i>
+                        </label>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="input">
+                            <input type="text" name="max_price" placeholder="Max pris" value="{{ form.max_price.value|default_if_none:"" }}">
+                        </label>
+                    </div>
+                    
+                    <div class="col col-2">
+                        <label class="select">
+                        {{ form.ordering }}
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-20">
+                    <div class="col col-2 col-md-offset-1">
+                        <label class="checkbox">
+                            {{ form.show_full_boked }} <i></i>
+                            Visa Fullbokade
+                        </label>
+                    </div>
+
+                    <div class="col col-2">
+                        <label class="checkbox">
+                            {{ form.show_canceled }} <i></i>
+                            Visa inställda
+                        </label>
+                    </div>
+                    
+                    <div class="col col-2">
+                        <label class="checkbox">
+                            {{ form.show_done }} <i></i>
+                            Visa Genomförda
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1 margin-bottom-10">
+                        <button type="submit" class="btn-u btn-block btn-u-green">Sök</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="/booking">
+                            <button type="button" class="btn-u btn-block btn-u-aqua">Rensa alla filter</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div><!--/container-->     
+    <!--=== End Search Block Version 2 ===-->
+
+    <div class="bg-grey">
+        <div class="container content-xs">
+
+        {% if page %}
+            {% for booking in page %}
+                {% ifequal forloop.counter0|modulo:3 0 %}
+                    <ul class="row list-row margin-bottom-20">
+                {% endifequal %}
+
+                {% include "booking_card.html" with booking=booking type='basic' %}
+
+                {% ifequal forloop.counter0|modulo:3 2 %}
+                    </ul>
+                {% endifequal %}
+            {% endfor %}
+        {% else %}
+            {% include "booking_card.html" with type='nothing_found' %}
+        {% endif %}
+    </div>
+
+    {% include "paginator.html" with paginator=paginator %}
+
+{% endblock %}

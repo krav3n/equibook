@@ -1,0 +1,44 @@
+# Public image of elasticsearch
+hbelasticsearch:
+  image: elasticsearch
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+
+hbrabbitmq:
+  image: rabbitmq
+  environment:
+    DOCKER_NAME: hb-rabbitmq
+
+hbredis:
+  image: redis
+  ports:
+    - "6381:6379"
+  environment:
+    DOCKER_NAME: hb-redis
+
+hbmysql:
+  image: mysql
+  ports:
+    - "3309:3306"
+  environment:
+    DOCKER_NAME: hb-mysql
+
+hbmemcached:
+  image: memcached
+  command: /sbin/my_init -- /usr/bin/memcached -m 64 -p 11211 -u memcache -l 0.0.0.0
+  ports:
+    - "11213:11211"
+  environment:
+    DOCKER_NAME: hb-memcached
+
+hbweb:
+  # build: horsebook/
+  build: .
+  volumes:
+    - ".:/srv"
+  ports:
+    - "8080:8080"
+  command: /sbin/my_init
+  environment:
+    DOCKER_NAME: hb-web
